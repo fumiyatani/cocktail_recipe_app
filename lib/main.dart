@@ -24,7 +24,6 @@ class TextFormListViewPage extends StatefulWidget {
 }
 
 class _TextFormListViewPageState extends State<TextFormListViewPage> {
-
   // テキストフィールドの管理用コントローラを作成
   final myController = TextEditingController();
 
@@ -52,36 +51,43 @@ class _TextFormListViewPageState extends State<TextFormListViewPage> {
         centerTitle: true,
         title: Text('My Cocktail recipe'),
       ),
-      body: Container (
+      body: Container(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              // テキストフィールド
-              Padding(
-                padding: const EdgeInsets.all(17.0),
-                // Icon(Icons.add),
-                child: TextField(
-                  controller: myController,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Icon(Icons.search),
+                Flexible(
+                  child: Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: myController,
+                    ),
+                  ),
                 ),
-              ),
-              // リストビュー
-              Expanded(
-                child:ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: items.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final item = items[index];
+                Icon(Icons.close),
+              ],
+            ),
+            // リストビュー
+            Expanded(
+              child: ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: items.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final item = items[index];
 
-                      return new Card(
-                        child: ListTile(
-                          leading: Icon(Icons.dehaze_outlined),
-                          title: Text(item["title"]),
-                        ),
-                      );
-                    }),
-              ),
-            ]),
+                    return new Card(
+                      child: ListTile(
+                        leading: Icon(Icons.dehaze_outlined),
+                        title: Text(item["title"]),
+                      ),
+                    );
+                  }),
+            ),
+          ],
+        ),
       ),
       // 投稿ボタン
       floatingActionButton: FloatingActionButton(
