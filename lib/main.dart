@@ -44,6 +44,8 @@ class _TextFormListViewPageState extends State<TextFormListViewPage> {
     super.dispose();
   }
 
+  void deleteTextFieldStr() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,16 +59,22 @@ class _TextFormListViewPageState extends State<TextFormListViewPage> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                Icon(Icons.search),
+                new Icon(Icons.search, size: 35.0),
                 Flexible(
                   child: Padding(
                     padding: EdgeInsets.all(8.0),
                     child: TextField(
                       controller: myController,
+                      decoration: InputDecoration(
+                        hintText: "Input Cocktail name",
+                      ),
                     ),
                   ),
                 ),
-                Icon(Icons.close),
+                IconButton(
+                  onPressed: myController.clear,
+                  icon: Icon (Icons.clear),
+                ),
               ],
             ),
             // リストビュー
