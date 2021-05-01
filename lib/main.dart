@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flappy_search_bar/flappy_search_bar.dart';
+
+import 'cocktail_search_bar.dart';
 
 void main() {
   runApp(MyApp());
@@ -86,12 +89,7 @@ class _TextFormListViewPageState extends State<TextFormListViewPage> {
                   itemBuilder: (BuildContext context, int index) {
                     final item = items[index];
 
-                    return new Card(
-                      child: ListTile(
-                        leading: Icon(Icons.dehaze_outlined),
-                        title: Text(item["title"]),
-                      ),
-                    );
+                    return createCard(item);
                   }),
             ),
           ],
@@ -106,6 +104,31 @@ class _TextFormListViewPageState extends State<TextFormListViewPage> {
           myController.clear();
         },
         child: Icon(Icons.add),
+      ),
+    );
+  }
+
+  /// Card Widget を作成する
+  /// 引数には Map を取る
+  ///   { key (String型): value(dynamic型) }
+  Card createCard(Map<String, dynamic> item) {
+
+    //
+    // 具体例{ title (String型): 表示される文字列(dynamic型) }
+    return new Card(
+      child: Row(
+        children: [
+          Text(item["title"]),
+          IconButton(
+            icon: Icon(Icons.close),
+            onPressed: () {
+              // IconButtonをタップした時にこの中が呼ばれる
+              setState(() {
+                items.remove(item);
+              });
+            },
+          ),
+        ],
       ),
     );
   }
