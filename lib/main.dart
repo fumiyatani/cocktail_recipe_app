@@ -1,3 +1,4 @@
+import 'package:cocktail_recipe_app/data/CocktailExpansionPanelItem.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -30,10 +31,21 @@ class _TextFormListViewPageState extends State<TextFormListViewPage> {
   // データ格納用リスト
   List<String> items = [];
 
+  // カクテル情報格納リスト
+  List<CocktailExpansionPanelItem> cocktailExpansionPanelItemList = [];
+
   //　テキストフィールドに入力されたアイテムをリストに追加（投稿ボタンが押されたときに呼び出す関数）
   void _addItem(String inputText) {
     setState(() {
       items.add(inputText);
+
+      // カクテル情報を作成して格納
+      cocktailExpansionPanelItemList.add(
+        CocktailExpansionPanelItem(
+          name: inputText,
+          contentText: inputText + ": カクテルの説明文が表示する",
+        ),
+      );
     });
   }
 
@@ -78,17 +90,11 @@ class _TextFormListViewPageState extends State<TextFormListViewPage> {
               ],
             ),
             // リストビュー
-            Expanded(
-              child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemCount: items.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final item = items[index];
-
-                    return createCard(item);
-                  }),
-            ),
+            SingleChildScrollView(
+              child: Container(
+                child: _buildExpansionPanel(),
+              ),
+            )
           ],
         ),
       ),
@@ -127,6 +133,46 @@ class _TextFormListViewPageState extends State<TextFormListViewPage> {
           ),
         ],
       ),
+    );
+  }
+
+  /// 開閉可能なリスト Item を作成する
+  Widget _buildExpansionPanel() {
+    return ExpansionPanelList(
+      expansionCallback: (int index, bool isExpanded) {
+        setState(() {
+          // indexに対応する ExpansionPanel のデータを取得して Body の表示非表示を変更する
+          cocktailExpansionPanelItemList[index].isExpanded = !isExpanded;
+        });
+      },
+      children: cocktailExpansionPanelItemList
+          .map<ExpansionPanel>((CocktailExpansionPanelItem cocktailItem) {
+        return ExpansionPanel(
+          headerBuilder: (BuildContext context, bool isExpanded) {
+            // カクテル名が表示されるタイトル部分
+            return ListTile(
+              title: Text(cocktailItem.name),
+              trailing: IconButton(
+                icon: Icon(Icons.close),
+                onPressed: () {
+                  setState(() {
+                    // カクテル情報を削除. removeWhere ってなんだろう?
+                    cocktailExpansionPanelItemList.removeWhere(
+                        (CocktailExpansionPanelItem item) =>
+                            item == cocktailItem);
+                  });
+                },
+              ),
+            );
+          },
+          // カクテルの情報が表示されるボディ部分
+          body: ListTile(
+            title: Text(cocktailItem.contentText),
+            subtitle: Text(cocktailItem.contentText),
+          ),
+          isExpanded: cocktailItem.isExpanded,
+        );
+      }).toList(),
     );
   }
 }
