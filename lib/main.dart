@@ -60,18 +60,17 @@ class _TextFormListViewPageState extends State<TextFormListViewPage> {
         centerTitle: true,
         title: Text('My Cocktail recipe'),
       ),
-      body: Container(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            _buildSearchBar(),
-            SingleChildScrollView(
-              child: Container(
-                child: _buildExpansionPanel(),
-              ),
-            )
-          ],
-        ),
+      body: Column(
+        children: [
+          _buildSearchBar(),
+          Flexible(
+            child: ListView(
+              children: [
+                _buildExpansionPanel()
+              ]
+            ),
+          )
+        ],
       ),
       // 投稿ボタン
       floatingActionButton: FloatingActionButton(
