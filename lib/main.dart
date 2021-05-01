@@ -28,17 +28,12 @@ class _TextFormListViewPageState extends State<TextFormListViewPage> {
   // テキストフィールドの管理用コントローラを作成
   final myController = TextEditingController();
 
-  // データ格納用リスト
-  List<String> items = [];
-
   // カクテル情報格納リスト
   List<CocktailExpansionPanelItem> cocktailExpansionPanelItemList = [];
 
   //　テキストフィールドに入力されたアイテムをリストに追加（投稿ボタンが押されたときに呼び出す関数）
   void _addItem(String inputText) {
     setState(() {
-      items.add(inputText);
-
       // カクテル情報を作成して格納
       cocktailExpansionPanelItemList.add(
         CocktailExpansionPanelItem(
@@ -107,31 +102,6 @@ class _TextFormListViewPageState extends State<TextFormListViewPage> {
           myController.clear();
         },
         child: Icon(Icons.add),
-      ),
-    );
-  }
-
-  /// Card Widget を作成する
-  /// 引数には Map を取る
-  ///   { key (String型): value(dynamic型) }
-  Card createCard(String item) {
-
-    //
-    // 具体例{ title (String型): 表示される文字列(dynamic型) }
-    return new Card(
-      child: Row(
-        children: [
-          Text(item),
-          IconButton(
-            icon: Icon(Icons.close),
-            onPressed: () {
-              // IconButtonをタップした時にこの中が呼ばれる
-              setState(() {
-                items.remove(item);
-              });
-            },
-          ),
-        ],
       ),
     );
   }
