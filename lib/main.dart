@@ -31,12 +31,12 @@ class _TextFormListViewPageState extends State<TextFormListViewPage> {
   final myController = TextEditingController();
 
   // データ格納用リスト
-  List<Map<String, dynamic>> items = [];
+  List<String> items = [];
 
   //　テキストフィールドに入力されたアイテムをリストに追加（投稿ボタンが押されたときに呼び出す関数）
   void _addItem(String inputText) {
     setState(() {
-      items.add({"title": inputText});
+      items.add(inputText);
     });
   }
 
@@ -111,14 +111,14 @@ class _TextFormListViewPageState extends State<TextFormListViewPage> {
   /// Card Widget を作成する
   /// 引数には Map を取る
   ///   { key (String型): value(dynamic型) }
-  Card createCard(Map<String, dynamic> item) {
+  Card createCard(String item) {
 
     //
     // 具体例{ title (String型): 表示される文字列(dynamic型) }
     return new Card(
       child: Row(
         children: [
-          Text(item["title"]),
+          Text(item),
           IconButton(
             icon: Icon(Icons.close),
             onPressed: () {
