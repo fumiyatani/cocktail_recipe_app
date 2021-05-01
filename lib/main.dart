@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flappy_search_bar/flappy_search_bar.dart';
-
-import 'cocktail_search_bar.dart';
 
 void main() {
   runApp(MyApp());
