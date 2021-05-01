@@ -64,27 +64,7 @@ class _TextFormListViewPageState extends State<TextFormListViewPage> {
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                new Icon(Icons.search, size: 35.0),
-                Flexible(
-                  child: Padding(
-                    padding: EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: myController,
-                      decoration: InputDecoration(
-                        hintText: "Input Cocktail name",
-                      ),
-                    ),
-                  ),
-                ),
-                IconButton(
-                  onPressed: myController.clear,
-                  icon: Icon (Icons.clear),
-                ),
-              ],
-            ),
-            // リストビュー
+            _buildSearchBar(),
             SingleChildScrollView(
               child: Container(
                 child: _buildExpansionPanel(),
@@ -103,6 +83,30 @@ class _TextFormListViewPageState extends State<TextFormListViewPage> {
         },
         child: Icon(Icons.add),
       ),
+    );
+  }
+
+  /// 検索バーを作成する
+  Widget _buildSearchBar() {
+    return Row(
+      children: <Widget>[
+        new Icon(Icons.search, size: 35.0),
+        Flexible(
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: TextField(
+              controller: myController,
+              decoration: InputDecoration(
+                hintText: "Input Cocktail name",
+              ),
+            ),
+          ),
+        ),
+        IconButton(
+          onPressed: myController.clear,
+          icon: Icon(Icons.clear),
+        ),
+      ],
     );
   }
 
