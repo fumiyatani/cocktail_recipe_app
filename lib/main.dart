@@ -11,20 +11,20 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Cocktail recipe',
       theme: new ThemeData.dark(),
-      home: TextFormListViewPage(),
+      home: CocktailListPage(),
     );
   }
 }
 
-class TextFormListViewPage extends StatefulWidget {
-  TextFormListViewPage({Key key, this.title}) : super(key: key);
+class CocktailListPage extends StatefulWidget {
+  CocktailListPage({Key key, this.title}) : super(key: key);
   final String title;
 
   @override
-  _TextFormListViewPageState createState() => _TextFormListViewPageState();
+  _CocktailListPage createState() => _CocktailListPage();
 }
 
-class _TextFormListViewPageState extends State<TextFormListViewPage> {
+class _CocktailListPage extends State<CocktailListPage> {
   // テキストフィールドの管理用コントローラを作成
   final myController = TextEditingController();
 
