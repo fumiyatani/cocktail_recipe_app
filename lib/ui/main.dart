@@ -1,4 +1,4 @@
-import 'package:cocktail_recipe_app/data/CocktailExpansionPanelItem.dart';
+import 'package:cocktail_recipe_app/ui/cocktail_expansion_panel_item.dart';
 import 'package:flutter/material.dart';
 
 void main() {
