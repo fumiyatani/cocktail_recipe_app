@@ -66,8 +66,8 @@ class _CocktailListPage extends State<CocktailListPage> {
           Flexible(
             child: ListView(
               children: [
-                _buildExpansionPanelList()
-              ]
+                _buildExpansionPanelList(),
+              ],
             ),
           )
         ],
@@ -119,33 +119,37 @@ class _CocktailListPage extends State<CocktailListPage> {
         });
       },
       children: cocktailExpansionPanelItemList
-          .map<ExpansionPanel>((CocktailExpansionPanelItem cocktailItem) {
-        return ExpansionPanel(
-          headerBuilder: (BuildContext context, bool isExpanded) {
-            // カクテル名が表示されるタイトル部分
-            return ListTile(
-              title: Text(cocktailItem.name),
-              trailing: IconButton(
-                icon: Icon(Icons.close),
-                onPressed: () {
-                  setState(() {
-                    // カクテル情報を削除. removeWhere ってなんだろう?
-                    cocktailExpansionPanelItemList.removeWhere(
-                        (CocktailExpansionPanelItem item) =>
-                            item == cocktailItem);
-                  });
-                },
-              ),
-            );
-          },
-          // カクテルの情報が表示されるボディ部分
-          body: ListTile(
-            title: Text(cocktailItem.contentText),
-            subtitle: Text(cocktailItem.contentText),
+          .map<ExpansionPanel>((CocktailExpansionPanelItem cocktailItem) =>
+              _buildExpansionPanel(cocktailItem))
+          .toList(),
+    );
+  }
+
+  // 開閉可能な ExpansionPanel の Item を作成する
+  ExpansionPanel _buildExpansionPanel(CocktailExpansionPanelItem cocktailItem) {
+    return ExpansionPanel(
+      headerBuilder: (BuildContext context, bool isExpanded) {
+        // カクテル名が表示されるタイトル部分
+        return ListTile(
+          title: Text(cocktailItem.name),
+          trailing: IconButton(
+            icon: Icon(Icons.close),
+            onPressed: () {
+              setState(() {
+                // カクテル情報を削除. removeWhere ってなんだろう?
+                cocktailExpansionPanelItemList.removeWhere(
+                    (CocktailExpansionPanelItem item) => item == cocktailItem);
+              });
+            },
           ),
-          isExpanded: cocktailItem.isExpanded,
         );
-      }).toList(),
+      },
+      // カクテルの情報が表示されるボディ部分
+      body: ListTile(
+        title: Text(cocktailItem.contentText),
+        subtitle: Text(cocktailItem.contentText),
+      ),
+      isExpanded: cocktailItem.isExpanded,
     );
   }
 }
