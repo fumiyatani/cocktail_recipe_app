@@ -33,9 +33,16 @@ dependencies:
   # 通信処理のライブラリ
   http: ^0.13.2
 
+  json_annotation: ^4.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  # JSON シリアライズ/デシリアライズ用のライブラリ
+  # JSON の Generator がついているので楽かも
+  build_runner: ^2.0.1
+  json_serializable: ^4.1.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
