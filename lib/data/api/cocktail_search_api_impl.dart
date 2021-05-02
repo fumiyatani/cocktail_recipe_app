@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:cocktail_recipe_app/data/api/CocktailSearchApi.dart';
+import 'package:cocktail_recipe_app/data/api/cocktail_search_api.dart';
 import 'package:cocktail_recipe_app/data/api/entity/Cocktails.dart';
 import 'package:http/http.dart' as http;
 
