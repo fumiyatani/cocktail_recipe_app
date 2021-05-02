@@ -66,7 +66,7 @@ class _CocktailListPage extends State<CocktailListPage> {
           Flexible(
             child: ListView(
               children: [
-                _buildExpansionPanel()
+                _buildExpansionPanelList()
               ]
             ),
           )
@@ -110,7 +110,7 @@ class _CocktailListPage extends State<CocktailListPage> {
   }
 
   /// 開閉可能なリスト Item を作成する
-  Widget _buildExpansionPanel() {
+  Widget _buildExpansionPanelList() {
     return ExpansionPanelList(
       expansionCallback: (int index, bool isExpanded) {
         setState(() {
