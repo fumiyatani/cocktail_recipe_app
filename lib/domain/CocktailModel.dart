@@ -10,16 +10,22 @@ class CocktailModel extends ChangeNotifier {
   UnmodifiableListView<CocktailExpansionPanelItem>
     get items => UnmodifiableListView(_internalItemList);
 
-  void updateCocktailExpansionPanelItemList(List<CocktailExpansionPanelItem> list) {
-
+  void onUpdateCocktailExpansionPanelItemList(List<CocktailExpansionPanelItem> list) {
     _internalItemList.addAll(list);
-
     notifyListeners();
   }
 
-  void removeCocktailExpansionPanelItemList() {
+  void onRemoveAll() {
     _internalItemList.clear();
+    notifyListeners();
+  }
 
+  void onChangeDescriptionTextVisibility(int index, isExpanded) {
+    if (index < 0) {
+      throw Exception("index が 0 以下です");
+    }
+
+    _internalItemList[index].isExpanded = isExpanded;
     notifyListeners();
   }
 }

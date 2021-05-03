@@ -37,16 +37,16 @@ class _CocktailListPage extends State<CocktailListPage> {
   // テキストフィールドの管理用コントローラを作成
   final myController = TextEditingController();
 
-  // カクテル情報格納リスト
-  List<CocktailExpansionPanelItem> cocktailExpansionPanelItemList = [];
-
-  // 通信結果
-  Future<Cocktails> futureCocktails;
-
   //　テキストフィールドに入力されたアイテムをリストに追加（投稿ボタンが押されたときに呼び出す関数）
   Future<void> _addItem(String inputText) async {
-    futureCocktails = CocktailSearchApiImpl().searchCocktails(inputText);
-    setState(() {});
+    Cocktails result = await CocktailSearchApiImpl().searchCocktails(inputText);
+    List<CocktailExpansionPanelItem> list = result.cocktails
+        .map<CocktailExpansionPanelItem>((cocktail) =>
+            CocktailExpansionPanelItem(
+                name: cocktail.cocktailName,
+                contentText: cocktail.cocktailDesc))
+        .toList();
+    context.read<CocktailModel>().onUpdateCocktailExpansionPanelItemList(list);
   }
 
   @override
@@ -68,31 +68,7 @@ class _CocktailListPage extends State<CocktailListPage> {
       body: Column(
         children: [
           _buildSearchBar(),
-          Flexible(
-            child: ListView(
-              children: [
-                FutureBuilder<Cocktails>(
-                  future: futureCocktails,
-                  builder: (BuildContext context, AsyncSnapshot<Cocktails> snapshot) {
-                    debugPrint("通信処理 FutureBuilder: ${snapshot.data}");
-                    if (snapshot.hasData) {
-                      return _buildExpansionPanelList(
-                        snapshot.data.cocktails.map((cocktail) =>
-                            CocktailExpansionPanelItem(
-                                name: cocktail.cocktailName,
-                                contentText: cocktail.cocktailDesc)).toList(),
-                      );
-                    } else if (snapshot.hasError) {
-                      return Text("エラー発生");
-                    } else {
-                      return Text("まだ検索してないよ");
-                    }
-                  },
-                ),
-                // _buildExpansionPanelList(),
-              ],
-            ),
-          )
+          _buildExpansionPanelList(),
         ],
       ),
       // 投稿ボタン
@@ -133,21 +109,27 @@ class _CocktailListPage extends State<CocktailListPage> {
   }
 
   /// 開閉可能なリスト Item を作成する
-  Widget _buildExpansionPanelList(
-      List<CocktailExpansionPanelItem> cocktailItemList) {
-    return ExpansionPanelList(
-      expansionCallback: (int index, bool isExpanded) {
-        setState(() {
-          // indexに対応する ExpansionPanel のデータを取得して Body の表示非表示を変更する
-          // もう一度setStateが走ってしまい、リストの再取得が行われ、内部的に表示フラグがたってもfalseに書き換えられてしまう。
-          cocktailItemList[index].isExpanded = !isExpanded;
-          debugPrint("表示非表示 : ${cocktailItemList[index].isExpanded}");
-        });
-      },
-      children: cocktailItemList
-          .map<ExpansionPanel>((CocktailExpansionPanelItem cocktailItem) =>
-              _buildExpansionPanel(cocktailItem))
-          .toList(),
+  Widget _buildExpansionPanelList() {
+    return Flexible(
+      child: ListView(
+        children: [
+          Consumer<CocktailModel>(builder:
+              (BuildContext context, CocktailModel cocktailModel, child) {
+            return ExpansionPanelList(
+              expansionCallback: (int index, bool isExpanded) {
+                cocktailModel.onChangeDescriptionTextVisibility(
+                  index, !isExpanded);
+                debugPrint("表示非表示 : $isExpanded");
+              },
+              children: cocktailModel.items
+                  .map<ExpansionPanel>(
+                      (CocktailExpansionPanelItem cocktailItem) =>
+                          _buildExpansionPanel(cocktailItem))
+                  .toList(),
+            );
+          })
+        ],
+      ),
     );
   }
 
