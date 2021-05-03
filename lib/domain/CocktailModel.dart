@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:cocktail_recipe_app/ui/cocktail_expansion_panel_item.dart';
+import 'package:cocktail_recipe_app/screens/list/cocktail_expansion_panel_item.dart';
 import 'package:flutter/foundation.dart';
 
 class CocktailModel extends ChangeNotifier {
