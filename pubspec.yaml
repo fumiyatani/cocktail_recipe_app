@@ -36,6 +36,9 @@ dependencies:
   # Null-safty対策でダウングレード
   json_annotation: ^3.1.1
 
+  # 状態管理用のライブラリ
+  provider: ^4.3.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
