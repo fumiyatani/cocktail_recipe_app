@@ -1,12 +1,11 @@
 import 'package:cocktail_recipe_app/data/api/cocktail_search_api.dart';
-import 'package:cocktail_recipe_app/data/api/cocktail_search_api_impl.dart';
 import 'package:cocktail_recipe_app/data/api/entity/cocktails.dart';
 
 class CocktailListUseCase {
 
-  // todo コンストラクタインジェクションをする
+  CocktailListUseCase(this._cocktailSearchApi);
 
-  CocktailSearchApi _cocktailSearchApi = CocktailSearchApiImpl();
+  final CocktailSearchApi _cocktailSearchApi;
 
   Future<Cocktails> searchCocktails(String searchKeyword) {
     return _cocktailSearchApi.searchCocktails(searchKeyword);

@@ -7,8 +7,10 @@ import 'package:cocktail_recipe_app/screens/list/cocktail_ext.dart';
 import 'package:flutter/foundation.dart';
 
 class CocktailListViewModel extends ChangeNotifier {
-  // todo インジェクションさせる
-  CocktailListUseCase _cocktailListUseCase = CocktailListUseCase();
+
+  CocktailListViewModel(this._cocktailListUseCase);
+
+  final CocktailListUseCase _cocktailListUseCase;
 
   List<CocktailExpansionPanelItem> _internalItemList = [];
 
