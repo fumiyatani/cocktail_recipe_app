@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -33,21 +33,21 @@ dependencies:
   # 通信処理のライブラリ
   http: ^0.13.2
 
-  # Null-safty対策でダウングレード
-  json_annotation: ^3.1.1
+  json_annotation: ^4.0.1
 
   # 状態管理用のライブラリ
-  provider: ^4.3.3
+  provider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   # JSON シリアライズ/デシリアライズ用のライブラリ
-  # JSON の Generator がついているので楽かも
   # Null-safty対策でダウングレード
   build_runner: ^1.10.9
-  json_serializable: ^3.5.1
+  json_serializable: ^4.1.1
+
+  mockito: ^5.0.7
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
