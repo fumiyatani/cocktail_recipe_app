@@ -2,6 +2,7 @@ import 'package:cocktail_recipe_app/data/api/cocktail_search_api_impl.dart';
 import 'package:cocktail_recipe_app/data/api/entity/Cocktails.dart';
 import 'package:cocktail_recipe_app/domain/CocktailModel.dart';
 import 'package:cocktail_recipe_app/screens/list/cocktail_expansion_panel_item.dart';
+import 'package:cocktail_recipe_app/screens/list/cocktail_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -14,30 +15,6 @@ class CocktailListPage extends StatefulWidget {
 }
 
 class _CocktailListPage extends State<CocktailListPage> {
-  // テキストフィールドの管理用コントローラを作成
-  final myController = TextEditingController();
-
-  //　テキストフィールドに入力されたアイテムをリストに追加（投稿ボタンが押されたときに呼び出す関数）
-  Future<void> _addItem(String inputText) async {
-    Cocktails result = await CocktailSearchApiImpl().searchCocktails(inputText);
-    List<CocktailExpansionPanelItem> list = result.cocktails
-        .map<CocktailExpansionPanelItem>((cocktail) =>
-        CocktailExpansionPanelItem(
-            name: cocktail.cocktailName,
-            contentText: cocktail.cocktailDesc))
-        .toList();
-    context.read<CocktailModel>().onUpdateCocktailExpansionPanelItemList(list);
-  }
-
-  @override
-  // widgetの破棄時にコントローラも破棄する
-  void dispose() {
-    myController.dispose();
-    super.dispose();
-  }
-
-  void deleteTextFieldStr() {}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,44 +24,10 @@ class _CocktailListPage extends State<CocktailListPage> {
       ),
       body: Column(
         children: [
-          _buildSearchBar(),
+          SearchBar(),
           _buildExpansionPanelList(),
         ],
       ),
-      // 投稿ボタン
-      floatingActionButton: FloatingActionButton(
-        // onPressedでボタンが押されたらテキストフィールドの内容を取得して、アイテムに追加
-        onPressed: () {
-          _addItem(myController.text);
-          // テキストフィールドの内容をクリア
-          myController.clear();
-        },
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-
-  /// 検索バーを作成する
-  Widget _buildSearchBar() {
-    return Row(
-      children: <Widget>[
-        new Icon(Icons.search, size: 35.0),
-        Flexible(
-          child: Padding(
-            padding: EdgeInsets.all(8.0),
-            child: TextField(
-              controller: myController,
-              decoration: InputDecoration(
-                hintText: "Input Cocktail name",
-              ),
-            ),
-          ),
-        ),
-        IconButton(
-          onPressed: myController.clear,
-          icon: Icon(Icons.clear),
-        ),
-      ],
     );
   }
 
@@ -93,18 +36,13 @@ class _CocktailListPage extends State<CocktailListPage> {
     return Flexible(
       child: ListView(
         children: [
-          Consumer<CocktailModel>(builder:
-              (BuildContext context, CocktailModel cocktailModel, child) {
+          Consumer<CocktailModel>(builder: (BuildContext context, CocktailModel cocktailModel, child) {
             return ExpansionPanelList(
               expansionCallback: (int index, bool isExpanded) {
-                cocktailModel.onChangeDescriptionTextVisibility(
-                    index, !isExpanded);
-                debugPrint("表示非表示 : $isExpanded");
+                cocktailModel.onChangeDescriptionTextVisibility(index, !isExpanded);
               },
               children: cocktailModel.items
-                  .map<ExpansionPanel>(
-                      (CocktailExpansionPanelItem cocktailItem) =>
-                      _buildExpansionPanel(cocktailItem))
+                  .map<ExpansionPanel>((CocktailExpansionPanelItem cocktailItem) => _buildExpansionPanel(cocktailItem))
                   .toList(),
             );
           })
@@ -129,5 +67,78 @@ class _CocktailListPage extends State<CocktailListPage> {
       ),
       isExpanded: cocktailItem.isExpanded,
     );
+  }
+}
+
+class SearchBar extends StatefulWidget {
+  @override
+  State createState() => _SearchBarState();
+}
+
+class _SearchBarState extends State<SearchBar> {
+  // テキストフィールドの管理用コントローラを作成
+  final searchBarController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    searchBarController.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        _buildSearchIcon(),
+        _buildSearchKeywordInputTextField(),
+        _buildClearButton(),
+      ],
+    );
+  }
+
+  Widget _buildSearchIcon() {
+    return const Icon(Icons.search, size: 35.0);
+  }
+
+  Widget _buildSearchKeywordInputTextField() {
+    return Flexible(
+      child: Padding(
+        padding: EdgeInsets.all(8.0),
+        child: TextField(
+          onSubmitted: (inputText) => {_searchCocktails(inputText)},
+          controller: searchBarController,
+          decoration: InputDecoration(
+            hintText: "Input Cocktail name",
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildClearButton() {
+    return IconButton(
+      onPressed: () {
+        context.read<CocktailModel>().onRemoveAll();
+        searchBarController.clear();
+      },
+      icon: Icon(Icons.clear),
+    );
+  }
+
+  Future<void> _searchCocktails(String searchKeyword) async {
+    if (searchKeyword.isEmpty) {
+      return;
+    }
+
+    Cocktails result = await CocktailSearchApiImpl().searchCocktails(searchKeyword);
+
+    context.read<CocktailModel>().onUpdateCocktailExpansionPanelItemList(
+        result.cocktails.map((cocktail) => cocktail.toExpansionPanelItem()).toList());
   }
 }
