@@ -1,8 +1,5 @@
-import 'package:cocktail_recipe_app/data/api/cocktail_search_api_impl.dart';
-import 'package:cocktail_recipe_app/data/api/entity/cocktails.dart';
-import 'package:cocktail_recipe_app/domain/cocktail_model.dart';
+import 'package:cocktail_recipe_app/screens/list/cocktail_list_view_model.dart';
 import 'package:cocktail_recipe_app/screens/list/cocktail_expansion_panel_item.dart';
-import 'package:cocktail_recipe_app/screens/list/cocktail_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -36,7 +33,7 @@ class _CocktailListPage extends State<CocktailListPage> {
     return Flexible(
       child: ListView(
         children: [
-          Consumer<CocktailModel>(builder: (BuildContext context, CocktailModel cocktailModel, child) {
+          Consumer<CocktailListViewModel>(builder: (BuildContext context, CocktailListViewModel cocktailModel, child) {
             return ExpansionPanelList(
               expansionCallback: (int index, bool isExpanded) {
                 cocktailModel.onChangeDescriptionTextVisibility(index, !isExpanded);
@@ -124,7 +121,7 @@ class _SearchBarState extends State<SearchBar> {
   Widget _buildClearButton() {
     return IconButton(
       onPressed: () {
-        context.read<CocktailModel>().onRemoveAll();
+        context.read<CocktailListViewModel>().onRemoveAll();
         searchBarController.clear();
       },
       icon: Icon(Icons.clear),
@@ -132,13 +129,6 @@ class _SearchBarState extends State<SearchBar> {
   }
 
   Future<void> _searchCocktails(String searchKeyword) async {
-    if (searchKeyword.isEmpty) {
-      return;
-    }
-
-    Cocktails result = await CocktailSearchApiImpl().searchCocktails(searchKeyword);
-
-    context.read<CocktailModel>().onUpdateCocktailExpansionPanelItemList(
-        result.cocktails.map((cocktail) => cocktail.toExpansionPanelItem()).toList());
+    context.read<CocktailListViewModel>().onSearchCocktail(searchKeyword);
   }
 }
