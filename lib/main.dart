@@ -1,4 +1,4 @@
-import 'package:cocktail_recipe_app/domain/CocktailModel.dart';
+import 'package:cocktail_recipe_app/domain/cocktail_model.dart';
 import 'package:cocktail_recipe_app/screens/list/cocktail_list_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
