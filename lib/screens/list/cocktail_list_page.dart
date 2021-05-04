@@ -1,11 +1,10 @@
-import 'package:cocktail_recipe_app/screens/list/cocktail_list_view_model.dart';
 import 'package:cocktail_recipe_app/screens/list/cocktail_expansion_panel_item.dart';
+import 'package:cocktail_recipe_app/screens/list/cocktail_list_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CocktailListPage extends StatefulWidget {
-  CocktailListPage({Key key, this.title}) : super(key: key);
-  final String title;
+  CocktailListPage();
 
   @override
   _CocktailListPage createState() => _CocktailListPage();

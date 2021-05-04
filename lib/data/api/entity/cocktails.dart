@@ -5,7 +5,7 @@ part 'Cocktails.g.dart';
 @JsonSerializable()
 class Cocktails {
   Cocktails(
-      {this.status, this.totalPages, this.currentPage, this.cocktails});
+      {required this.status, required this.totalPages, required this.currentPage, required this.cocktails});
 
   /// 正常時：0000, 現状使用するエラーは E001 (wordのフォーマットが不正)
   @JsonKey(name: 'status')
@@ -29,21 +29,21 @@ class Cocktails {
 class Cocktail {
 
   Cocktail(
-      {this.cocktailId,
-      this.cocktailName,
-      this.cocktailNameEnglish,
-      this.baseName,
-      this.techniqueName,
-      this.tasteName,
-      this.styleName,
-      this.alcohol,
-      this.topName,
-      this.glassName,
-      this.typeName,
-      this.cocktailDigest,
-      this.cocktailDesc,
-      this.recipeDesc,
-      this.recipes});
+      {required this.cocktailId,
+      required this.cocktailName,
+      required this.cocktailNameEnglish,
+      required this.baseName,
+      required this.techniqueName,
+      required this.tasteName,
+      required this.styleName,
+      required this.alcohol,
+      required this.topName,
+      required this.glassName,
+      required this.typeName,
+      required this.cocktailDigest,
+      required this.cocktailDesc,
+      required this.recipeDesc,
+      required this.recipes});
 
   @JsonKey(name: 'cocktail_id')
   final int cocktailId;
@@ -97,7 +97,7 @@ class Cocktail {
 
 @JsonSerializable()
 class Recipe {
-  Recipe({this.ingredientId, this.ingredientName, this.amount, this.unit});
+  Recipe({required this.ingredientId, required this.ingredientName, this.amount, this.unit});
 
   @JsonKey(name: 'ingredient_id')
   final int ingredientId;
@@ -107,11 +107,11 @@ class Recipe {
 
   /// 適量 or FullUP の場合は null を返却する
   @JsonKey(name: 'amount')
-  final String amount;
+  final String? amount;
 
   /// 単位として返却しうる値: ml,tsp.,dash,枚,個,適量,FullUP,glass
   @JsonKey(name: 'unit')
-  final String unit;
+  final String? unit;
 
   factory Recipe.fromJson(Map<String, dynamic> json) => _$RecipeFromJson(json);
 

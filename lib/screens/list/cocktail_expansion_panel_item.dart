@@ -3,11 +3,8 @@ class CocktailExpansionPanelItem {
   CocktailExpansionPanelItem({
       // isExpanded の初期値は閉じている状態にしたいので false を設定してる
       this.isExpanded = false,
-      this.name,
-      this.contentText})
-      : assert(isExpanded != null),
-        assert(name != null),
-        assert(contentText != null);
+      required this.name,
+      required this.contentText});
 
   bool isExpanded;
   String name;

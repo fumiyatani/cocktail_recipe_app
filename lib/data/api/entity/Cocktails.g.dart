@@ -11,15 +11,11 @@ Cocktails _$CocktailsFromJson(Map<String, dynamic> json) {
     status: json['status'] as String,
     totalPages: json['total_pages'] as int,
     currentPage: json['current_page'] as int,
-    cocktails: (json['cocktails'] as List)
-        ?.map((e) =>
-            e == null ? null : Cocktail.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    cocktails: (json['cocktails'] as List).map((e) => Cocktail.fromJson(e as Map<String, dynamic>)).toList(),
   );
 }
 
-Map<String, dynamic> _$CocktailsToJson(Cocktails instance) =>
-    <String, dynamic>{
+Map<String, dynamic> _$CocktailsToJson(Cocktails instance) => <String, dynamic>{
       'status': instance.status,
       'total_pages': instance.totalPages,
       'current_page': instance.currentPage,
@@ -42,10 +38,7 @@ Cocktail _$CocktailFromJson(Map<String, dynamic> json) {
     cocktailDigest: json['cocktail_digest'] as String,
     cocktailDesc: json['cocktail_desc'] as String,
     recipeDesc: json['recipe_desc'] as String,
-    recipes: (json['recipes'] as List)
-        ?.map((e) =>
-            e == null ? null : Recipe.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
+    recipes: (json['recipes'] as List).map((e) => Recipe.fromJson(e as Map<String, dynamic>)).toList(),
   );
 }
 

@@ -4,14 +4,11 @@ import 'package:cocktail_recipe_app/data/api/entity/cocktails.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  Cocktails mock;
-
-  setUp(() {
-    mock = Cocktails.fromJson(json.decode(testJsonData));
-  });
 
   group("正しくモデルにパースできるかの確認", () {
     test("Cocktails に変換できるか", () {
+      Cocktails mock = Cocktails.fromJson(json.decode(testJsonData));
+
       expect(mock.status, "0000");
       expect(mock.totalPages, 5);
       expect(mock.currentPage, 1);
@@ -19,6 +16,8 @@ void main() {
     });
 
     test("Cocktail に変換できるか", () {
+      Cocktails mock = Cocktails.fromJson(json.decode(testJsonData));
+
       expect(mock.cocktails.first.cocktailId, 1);
       expect(mock.cocktails.first.cocktailName, "マティーニ");
       expect(mock.cocktails.first.cocktailNameEnglish, "Martini");
@@ -37,6 +36,8 @@ void main() {
     });
 
     test("Recipe に変換できるか", () {
+      Cocktails mock = Cocktails.fromJson(json.decode(testJsonData));
+
       expect(mock.cocktails.first.recipes.first.ingredientId, 1);
       expect(mock.cocktails.first.recipes.first.ingredientName, "ジン");
       expect(mock.cocktails.first.recipes.first.amount, "50");
