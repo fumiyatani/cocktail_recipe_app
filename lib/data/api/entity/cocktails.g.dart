@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'Cocktails.dart';
+part of 'cocktails.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

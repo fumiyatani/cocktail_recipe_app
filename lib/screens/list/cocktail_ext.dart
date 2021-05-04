@@ -1,4 +1,4 @@
-import 'package:cocktail_recipe_app/data/api/entity/Cocktails.dart';
+import 'package:cocktail_recipe_app/data/api/entity/cocktails.dart';
 
 import 'cocktail_expansion_panel_item.dart';
 

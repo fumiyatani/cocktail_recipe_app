@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:cocktail_recipe_app/data/api/entity/Cocktails.dart';
+import 'package:cocktail_recipe_app/data/api/entity/cocktails.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

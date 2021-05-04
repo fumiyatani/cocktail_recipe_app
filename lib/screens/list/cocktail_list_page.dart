@@ -1,5 +1,5 @@
 import 'package:cocktail_recipe_app/data/api/cocktail_search_api_impl.dart';
-import 'package:cocktail_recipe_app/data/api/entity/Cocktails.dart';
+import 'package:cocktail_recipe_app/data/api/entity/cocktails.dart';
 import 'package:cocktail_recipe_app/domain/cocktail_model.dart';
 import 'package:cocktail_recipe_app/screens/list/cocktail_expansion_panel_item.dart';
 import 'package:cocktail_recipe_app/screens/list/cocktail_ext.dart';
