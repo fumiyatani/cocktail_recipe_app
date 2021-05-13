@@ -1,16 +1,26 @@
 # cocktail_recipe_app
 
-Flutter application.
+## プロジェクト構成
+- Flutter 2.2.0-11.0.pre.69
+- Dart SDK version: 2.12.2 (stable)
 
-## Getting Started
+## 使用ライブラリ
+### 通信
+- http: ^0.13.2
 
-This project is a starting point for a Flutter application.
+### JSONパース
+- json_serializable: ^4.1.1
+- json_annotation: ^4.0.1
 
-A few resources to get you started if this is your first Flutter project:
+### コード生成 (jsonをクラスに変換する際に使用)
+- build_runner: ^1.10.9
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### テストモック
+- mockito: ^5.0.7
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 今後
+- もう少しプロジェクトとして使えるように以下を導入する
+    - lint
+    - ローカルDB
+    - push通知
+    - navigation
