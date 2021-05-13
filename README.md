@@ -1,11 +1,11 @@
 # cocktail_recipe_app
 
-## プロジェクト概要
-### SDKバージョン
+## 開発環境
+- Android Studio 4.2
 - Flutter 2.2.0-11.0.pre.69
 - Dart SDK version: 2.12.2 (stable)
 
-### プロジェクトディレクトリ
+### ディレクトリ
 ```
 lib
 ├─ data
