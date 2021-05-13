@@ -38,6 +38,9 @@ dependencies:
   # 状態管理用のライブラリ
   provider: ^5.0.0
 
+  # 静的解析
+  analyzer: ^1.5.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -48,6 +51,8 @@ dev_dependencies:
   json_serializable: ^4.1.1
 
   mockito: ^5.0.7
+
+  effective_dart: ^1.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
