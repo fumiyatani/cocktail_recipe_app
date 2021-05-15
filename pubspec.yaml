@@ -33,6 +33,9 @@ dependencies:
   # 通信処理のライブラリ
   http: ^0.13.2
 
+  # 通信処理 プレリリース版にしないと他のライブラリとの依存関係でエラーになってしまうため。
+  chopper: ^4.0.0-nullsafety.1
+
   json_annotation: ^4.0.1
 
   # 状態管理用のライブラリ
@@ -49,6 +52,8 @@ dev_dependencies:
   # Null-safty対策でダウングレード
   build_runner: ^1.10.9
   json_serializable: ^4.1.1
+
+  chopper_generator: ^4.0.0-nullsafety.1
 
   mockito: ^5.0.7
 

@@ -32,6 +32,7 @@ lib
 
 ### 通信
 - http: ^0.13.2
+- chopper: ^4.0.0-nullsafety.1
 
 ### JSONパース
 - json_serializable: ^4.1.1
@@ -42,6 +43,7 @@ lib
 
 ### モック化
 - mockito: ^5.0.7
+- chopper_generator: ^4.0.0-nullsafety.1
 
 ## 静的解析
 - analyzer: ^1.5.0
