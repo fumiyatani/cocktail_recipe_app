@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:cocktail_recipe_app/data/api/cocktail_search_api.dart';
+import 'package:cocktail_recipe_app/data/api/cocktail_search_service.dart';
 import 'package:cocktail_recipe_app/data/api/entity/cocktails.dart';
 import 'package:http/http.dart';
 
 class CocktailSearchApiImpl with CocktailSearchApi {
-
   CocktailSearchApiImpl(this._client);
 
   final Client _client;
@@ -15,8 +15,16 @@ class CocktailSearchApiImpl with CocktailSearchApi {
   /// TODO Result 欲しい
   @override
   Future<Cocktails> searchCocktails(String word) async {
-    final response =
-        await _client.get(Uri.https("cocktail-f.com", "api/v1/cocktails"));
+    final chopperResponse = await CocktailSearchService.create(createCocktailChopper()).searchCocktails("モヒート");
+
+    if (chopperResponse.isSuccessful) {
+      // Response<Cocktails> で上手くパースできないため http を使っている時と同じようにパースをする
+      print('あり: ${Cocktails.fromJson(jsonDecode(chopperResponse.bodyString))}');
+    } else {
+      // todo エラー処理
+    }
+
+    final response = await _client.get(Uri.https("cocktail-f.com", "api/v1/cocktails"));
 
     if (response.statusCode != 200) {
       // TODO 後でエラー処理をする
