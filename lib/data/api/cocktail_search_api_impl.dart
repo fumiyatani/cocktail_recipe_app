@@ -15,11 +15,11 @@ class CocktailSearchApiImpl with CocktailSearchApi {
   /// TODO Result 欲しい
   @override
   Future<Cocktails> searchCocktails(String word) async {
-    final chopperResponse = await CocktailSearchService.create(createCocktailChopper()).searchCocktails("モヒート");
+    final chopperResponse = await CocktailSearchService.create(createCocktailChopper()).searchCocktails(word);
 
     if (chopperResponse.isSuccessful) {
       // Response<Cocktails> で上手くパースできないため http を使っている時と同じようにパースをする
-      print('あり: ${Cocktails.fromJson(jsonDecode(chopperResponse.bodyString))}');
+      return Cocktails.fromJson(jsonDecode(chopperResponse.bodyString));
     } else {
       // todo エラー処理
     }

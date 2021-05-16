@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:chopper/chopper.dart';
+import 'package:cocktail_recipe_app/data/api/entity/cocktails.dart';
+
+import 'cocktails_json_converter.dart';
 
 part 'cocktail_search_service.chopper.dart';
 
@@ -13,11 +16,11 @@ abstract class CocktailSearchService extends ChopperService {
 
   /// カクテル一覧を取得
   @Get(path: "/cocktails")
-  Future<Response> searchCocktails(@Query("word") String word,
+  Future<Response<Cocktails>> searchCocktails(@Query("word") String word,
       {@Query("page") int page = 1, @Query("limit") int limit = 100});
 }
 
 /// Chopper のインスタンスを生成するためのメソッド
 ChopperClient createCocktailChopper() {
-  return ChopperClient(baseUrl: _cocktailBaseUrl, converter: JsonConverter(), interceptors: [HttpLoggingInterceptor()]);
+  return ChopperClient(baseUrl: _cocktailBaseUrl, converter: CocktailsJsonConverter(), interceptors: [HttpLoggingInterceptor()]);
 }

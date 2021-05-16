@@ -17,7 +17,7 @@ class _$CocktailSearchService extends CocktailSearchService {
   final definitionType = CocktailSearchService;
 
   @override
-  Future<Response<dynamic>> searchCocktails(String word,
+  Future<Response<Cocktails>> searchCocktails(String word,
       {int page = 1, int limit = 100}) {
     final $url = '/api/v1/cocktails';
     final $params = <String, dynamic>{
@@ -26,6 +26,6 @@ class _$CocktailSearchService extends CocktailSearchService {
       'limit': limit
     };
     final $request = Request('GET', $url, client.baseUrl, parameters: $params);
-    return client.send<dynamic, dynamic>($request);
+    return client.send<Cocktails, Cocktails>($request);
   }
 }
