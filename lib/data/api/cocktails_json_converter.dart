@@ -4,6 +4,9 @@ import 'dart:convert';
 import 'package:chopper/chopper.dart';
 import 'package:cocktail_recipe_app/data/api/entity/cocktails.dart';
 
+/// 参考URL
+/// ref: https://www.raywenderlich.com/10099546-elegant-networking-in-flutter-with-chopper#toc-anchor-011
+/// InternalLinkedHashMap が Cocktails? の subtype ではないというエラーになってしまうため上記を参考にこのクラスを作成
 class CocktailsJsonConverter extends JsonConverter {
 
   @override
