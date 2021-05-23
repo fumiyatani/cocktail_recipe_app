@@ -32,13 +32,13 @@ class _CocktailListPage extends State<CocktailListPage> {
     return Flexible(
       child: ListView(
         children: [
-          Consumer<CocktailListViewModel>(builder: (BuildContext context, CocktailListViewModel cocktailModel, child) {
+          Consumer<CocktailListViewModel>(builder: (context, cocktailModel, child) {
             return ExpansionPanelList(
-              expansionCallback: (int index, bool isExpanded) {
+              expansionCallback: (index, isExpanded) {
                 cocktailModel.onChangeDescriptionTextVisibility(index, !isExpanded);
               },
               children: cocktailModel.items
-                  .map<ExpansionPanel>((CocktailExpansionPanelItem cocktailItem) => _buildExpansionPanel(cocktailItem))
+                  .map<ExpansionPanel>((cocktailItem) => _buildExpansionPanel(cocktailItem))
                   .toList(),
             );
           })
@@ -50,7 +50,7 @@ class _CocktailListPage extends State<CocktailListPage> {
   // 開閉可能な ExpansionPanel の Item を作成する
   ExpansionPanel _buildExpansionPanel(CocktailExpansionPanelItem cocktailItem) {
     return ExpansionPanel(
-      headerBuilder: (BuildContext context, bool isExpanded) {
+      headerBuilder: (context, isExpanded) {
         // カクテル名が表示されるタイトル部分
         return ListTile(
           title: Text(cocktailItem.name),
@@ -110,7 +110,7 @@ class _SearchBarState extends State<SearchBar> {
           onSubmitted: (inputText) => {_searchCocktails(inputText)},
           controller: searchBarController,
           decoration: InputDecoration(
-            hintText: "Input Cocktail name",
+            hintText: 'Input Cocktail name',
           ),
         ),
       ),
@@ -128,6 +128,6 @@ class _SearchBarState extends State<SearchBar> {
   }
 
   Future<void> _searchCocktails(String searchKeyword) async {
-    context.read<CocktailListViewModel>().onSearchCocktail(searchKeyword);
+    await context.read<CocktailListViewModel>().onSearchCocktail(searchKeyword);
   }
 }
