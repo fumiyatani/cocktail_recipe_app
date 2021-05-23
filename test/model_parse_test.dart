@@ -4,50 +4,49 @@ import 'package:cocktail_recipe_app/data/api/entity/cocktails.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
+  group('正しくモデルにパースできるかの確認', () {
+    test('Cocktails に変換できるか', () {
+      var mock = Cocktails.fromJson(json.decode(testJsonData) as Map<String, dynamic>);
 
-  group("正しくモデルにパースできるかの確認", () {
-    test("Cocktails に変換できるか", () {
-      Cocktails mock = Cocktails.fromJson(json.decode(testJsonData));
-
-      expect(mock.status, "0000");
+      expect(mock.status, '0000');
       expect(mock.totalPages, 5);
       expect(mock.currentPage, 1);
       expect(mock.cocktails.length, 20);
     });
 
-    test("Cocktail に変換できるか", () {
-      Cocktails mock = Cocktails.fromJson(json.decode(testJsonData));
+    test('Cocktail に変換できるか', () {
+      var mock = Cocktails.fromJson(json.decode(testJsonData) as Map<String, dynamic>);
 
       expect(mock.cocktails.first.cocktailId, 1);
-      expect(mock.cocktails.first.cocktailName, "マティーニ");
-      expect(mock.cocktails.first.cocktailNameEnglish, "Martini");
-      expect(mock.cocktails.first.baseName, "ジン");
-      expect(mock.cocktails.first.techniqueName, "ステア");
-      expect(mock.cocktails.first.tasteName, "辛口");
-      expect(mock.cocktails.first.styleName, "ショート");
+      expect(mock.cocktails.first.cocktailName, 'マティーニ');
+      expect(mock.cocktails.first.cocktailNameEnglish, 'Martini');
+      expect(mock.cocktails.first.baseName, 'ジン');
+      expect(mock.cocktails.first.techniqueName, 'ステア');
+      expect(mock.cocktails.first.tasteName, '辛口');
+      expect(mock.cocktails.first.styleName, 'ショート');
       expect(mock.cocktails.first.alcohol, 42);
-      expect(mock.cocktails.first.topName, "食前");
-      expect(mock.cocktails.first.glassName, "カクテルグラス");
-      expect(mock.cocktails.first.typeName, "アルコール");
-      expect(mock.cocktails.first.cocktailDigest, "カクテルの王様");
-      expect(mock.cocktails.first.cocktailDesc, "ジンの辛味とドライベルモットの香りが絶妙なカクテルの王様。時代が進むにつれ辛口へと変化している。使用するお酒の種類や配合が無数にあるため、バーによって味が異なると言われている。カクテル好きなら1度は味わっておきたい一杯。");
-      expect(mock.cocktails.first.recipeDesc, "ジンとドライベルモットをミキシンググラスでステアし、グラスに注ぐ。オリーブをカクテルピックに刺して沈め、仕上げにレモンピールをふる。");
+      expect(mock.cocktails.first.topName, '食前');
+      expect(mock.cocktails.first.glassName, 'カクテルグラス');
+      expect(mock.cocktails.first.typeName, 'アルコール');
+      expect(mock.cocktails.first.cocktailDigest, 'カクテルの王様');
+      expect(mock.cocktails.first.cocktailDesc,
+          'ジンの辛味とドライベルモットの香りが絶妙なカクテルの王様。時代が進むにつれ辛口へと変化している。使用するお酒の種類や配合が無数にあるため、バーによって味が異なると言われている。カクテル好きなら1度は味わっておきたい一杯。');
+      expect(mock.cocktails.first.recipeDesc, 'ジンとドライベルモットをミキシンググラスでステアし、グラスに注ぐ。オリーブをカクテルピックに刺して沈め、仕上げにレモンピールをふる。');
       expect(mock.cocktails.first.recipes.length, 4);
     });
 
-    test("Recipe に変換できるか", () {
-      Cocktails mock = Cocktails.fromJson(json.decode(testJsonData));
+    test('Recipe に変換できるか', () {
+      var mock = Cocktails.fromJson(json.decode(testJsonData) as Map<String, dynamic>);
 
       expect(mock.cocktails.first.recipes.first.ingredientId, 1);
-      expect(mock.cocktails.first.recipes.first.ingredientName, "ジン");
-      expect(mock.cocktails.first.recipes.first.amount, "50");
-      expect(mock.cocktails.first.recipes.first.unit, "ml");
+      expect(mock.cocktails.first.recipes.first.ingredientName, 'ジン');
+      expect(mock.cocktails.first.recipes.first.amount, '50');
+      expect(mock.cocktails.first.recipes.first.unit, 'ml');
     });
   });
-
 }
 
-const String testJsonData = """
+const String testJsonData = '''
 {
   "status": "0000",
   "total_pages": 5,
@@ -775,4 +774,4 @@ const String testJsonData = """
     }
   ]
 }
-""";
+''';

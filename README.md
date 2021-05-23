@@ -57,6 +57,8 @@ lib
     - ライブラリをインストールした際に使用する
 - flutter pub run build_runner build --delete-conflicting-outputs
     - Chopper の通信処理や JSON パース用のクラスを書き換えた際に使用する
+- flutter test
+    - テストの実行
 
 ## 今後
 - もう少しプロジェクトとして使えるように以下を導入する
