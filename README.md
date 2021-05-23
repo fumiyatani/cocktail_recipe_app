@@ -32,6 +32,7 @@ lib
 
 ### 通信
 - http: ^0.13.2
+- chopper: ^4.0.0-nullsafety.1
 
 ### JSONパース
 - json_serializable: ^4.1.1
@@ -42,6 +43,7 @@ lib
 
 ### モック化
 - mockito: ^5.0.7
+- chopper_generator: ^4.0.0-nullsafety.1
 
 ## 静的解析
 - analyzer: ^1.5.0
@@ -49,6 +51,12 @@ lib
 
 ## そのほかのツール
 - [gitignore.io](https://www.toptal.com/developers/gitignore)
+
+## よく使うコマンド
+- flutter pub get
+    - ライブラリをインストールした際に使用する
+- flutter pub run build_runner build --delete-conflicting-outputs
+    - Chopper の通信処理や JSON パース用のクラスを書き換えた際に使用する
 
 ## 今後
 - もう少しプロジェクトとして使えるように以下を導入する
