@@ -2,7 +2,7 @@
 
 ## 開発環境
 - Android Studio 4.2
-- Flutter 2.2.0-11.0.pre.69
+- Flutter version: 2.2.1 (stable)
 - Dart SDK version: 2.12.2 (stable)
 
 ### ディレクトリ
