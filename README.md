@@ -52,13 +52,19 @@ lib
 ## そのほかのツール
 - [gitignore.io](https://www.toptal.com/developers/gitignore)
 
-## よく使うコマンド
+## コマンド
 - flutter pub get
     - ライブラリをインストールした際に使用する
 - flutter pub run build_runner build --delete-conflicting-outputs
     - Chopper の通信処理や JSON パース用のクラスを書き換えた際に使用する
 - flutter test
     - テストの実行
+- flutter channel
+    - 現在のチャンネルを確認できる
+- flutter channel [master|dev|beta|stable]
+    - チャンネルの選択を行う
+- flutter upgrade
+    - flutter のアップデートを行う
 
 ## 今後
 - もう少しプロジェクトとして使えるように以下を導入する
