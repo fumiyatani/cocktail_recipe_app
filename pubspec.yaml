@@ -41,6 +41,13 @@ dependencies:
   # 状態管理用のライブラリ
   provider: ^5.0.0
 
+  # Flutter で状態管理アプリを使用する場合
+  flutter_riverpod: ^0.14.0+1
+
+  # flutter_hooks を使う場合は hooks_riverpod の使用も忘れない
+  flutter_hooks: ^0.16.0
+  hooks_riverpod: ^0.14.0+1
+
   # 静的解析
   analyzer: ^1.5.0
 
