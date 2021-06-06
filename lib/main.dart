@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
+  // Riverpod を使用する際のお約束
   runApp(ProviderScope(child: MyApp()));
 }
 

@@ -5,9 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+// Provider を使うために HookWidget を設定
+// これにより useProvider<T> が使用できる
 class CocktailListPage extends HookWidget {
   @override
   Widget build(BuildContext context) {
+    // ViewModelのインジェクション
     final cocktailListViewModel = useProvider<CocktailListViewModel>(cocktailListViewModelProvider);
 
     return Scaffold(

@@ -9,7 +9,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 // todo UseCase や Repository をどのようにインジェクションするか? ref.read or ref.watch ?
-// define Provider for CocktailViewModel
 final cocktailListViewModelProvider = ChangeNotifierProvider(
   (ref) => CocktailListViewModel(
     CocktailListUseCase(
@@ -20,6 +19,7 @@ final cocktailListViewModelProvider = ChangeNotifierProvider(
   ),
 );
 
+// イベント通知用の変数を複数持ちたいため ChangeNotifier を使用
 class CocktailListViewModel extends ChangeNotifier {
   CocktailListViewModel(this._cocktailListUseCase);
 
