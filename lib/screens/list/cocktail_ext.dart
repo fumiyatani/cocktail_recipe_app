@@ -4,6 +4,10 @@ import 'cocktail_expansion_panel_item.dart';
 
 extension CocktailExt on Cocktail {
   CocktailExpansionPanelItem toExpansionPanelItem() {
-    return CocktailExpansionPanelItem(name: cocktailName, contentText: cocktailDesc);
+    return CocktailExpansionPanelItem(
+      cocktailId: cocktailId.toString(),
+      name: cocktailName,
+      contentText: cocktailDesc,
+    );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:cocktail_recipe_app/screens/detail/cocktail_detail_page.dart';
 import 'package:cocktail_recipe_app/screens/list/cocktail_expansion_panel_item.dart';
 import 'package:cocktail_recipe_app/screens/list/cocktail_list_view_model.dart';
 import 'package:flutter/material.dart';
@@ -27,21 +28,22 @@ class _CocktailListPage extends State<CocktailListPage> {
     );
   }
 
-  /// 開閉可能なリスト Item を作成する
   Widget _buildExpansionPanelList() {
     return Flexible(
       child: ListView(
         children: [
-          Consumer<CocktailListViewModel>(builder: (context, cocktailModel, child) {
-            return ExpansionPanelList(
-              expansionCallback: (index, isExpanded) {
-                cocktailModel.onChangeDescriptionTextVisibility(index, !isExpanded);
-              },
-              children: cocktailModel.items
-                  .map<ExpansionPanel>((cocktailItem) => _buildExpansionPanel(cocktailItem))
-                  .toList(),
-            );
-          })
+          Consumer<CocktailListViewModel>(
+            builder: (context, cocktailModel, child) {
+              return ExpansionPanelList(
+                expansionCallback: (index, isExpanded) {
+                  cocktailModel.onChangeDescriptionTextVisibility(index, !isExpanded);
+                },
+                children: cocktailModel.items
+                    .map<ExpansionPanel>((cocktailItem) => _buildExpansionPanel(cocktailItem))
+                    .toList(),
+              );
+            },
+          )
         ],
       ),
     );
@@ -57,9 +59,24 @@ class _CocktailListPage extends State<CocktailListPage> {
         );
       },
       // カクテルの情報が表示されるボディ部分
-      body: ListTile(
-        title: Text(cocktailItem.contentText),
-        subtitle: Text(cocktailItem.contentText),
+      body: Column(
+        children: [
+          ListTile(
+            title: Text(cocktailItem.contentText),
+            subtitle: Text(cocktailItem.contentText),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.push<dynamic>(
+                context,
+                MaterialPageRoute<dynamic>(
+                  builder: (context) => CocktailDetailPage(cocktailId: cocktailItem.cocktailId),
+                ),
+              );
+            },
+            child: Text('詳細'),
+          ),
+        ],
       ),
       isExpanded: cocktailItem.isExpanded,
     );

@@ -1,12 +1,15 @@
 class CocktailExpansionPanelItem {
   // コンストラクタを {} でくくると名前付き引数になる
   CocktailExpansionPanelItem({
-      // isExpanded の初期値は閉じている状態にしたいので false を設定してる
-      this.isExpanded = false,
-      required this.name,
-      required this.contentText});
+    required this.cocktailId,
+    required this.name,
+    required this.contentText,
+    // isExpanded の初期値は閉じている状態にしたいので false を設定してる
+    this.isExpanded = false,
+  });
 
-  bool isExpanded;
+  String cocktailId;
   String name;
   String contentText;
+  bool isExpanded;
 }
