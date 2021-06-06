@@ -1,9 +1,24 @@
 import 'dart:collection';
 
+import 'package:cocktail_recipe_app/data/api/cocktail_search_api_impl.dart';
+import 'package:cocktail_recipe_app/data/api/cocktail_search_service.dart';
 import 'package:cocktail_recipe_app/domain/cocktail_list_use_case.dart';
 import 'package:cocktail_recipe_app/screens/list/cocktail_expansion_panel_item.dart';
 import 'package:cocktail_recipe_app/screens/list/cocktail_ext.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+// todo UseCase や Repository をどのようにインジェクションするか? ref.read or ref.watch ?
+// define Provider for CocktailViewModel
+final cocktailListViewModelProvider = ChangeNotifierProvider(
+  (ref) => CocktailListViewModel(
+    CocktailListUseCase(
+      CocktailSearchApiImpl(
+        CocktailSearchService.create(createCocktailChopper()),
+      ),
+    ),
+  ),
+);
 
 class CocktailListViewModel extends ChangeNotifier {
   CocktailListViewModel(this._cocktailListUseCase);
@@ -20,6 +35,7 @@ class CocktailListViewModel extends ChangeNotifier {
     }
 
     var result = await _cocktailListUseCase.searchCocktails(searchKeyword);
+    print(result);
     _internalItemList.addAll(result.cocktails.map((cocktail) => cocktail.toExpansionPanelItem()).toList());
     notifyListeners();
   }
