@@ -64,7 +64,9 @@ dev_dependencies:
 
   mockito: ^5.0.7
 
-  effective_dart: ^1.0.0
+  # 静的解析
+  # ref: https://github.com/google/pedantic
+  pedantic: ^1.11.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
